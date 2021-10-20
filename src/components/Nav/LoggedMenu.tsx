@@ -1,4 +1,3 @@
-
 import {
   Avatar,
   Menu,
@@ -8,8 +7,12 @@ import {
   MenuDivider,
   Center,
   useColorMode,
-  Box
+  Box,
+  Heading,
+  Input,
+  Select,
 } from '@chakra-ui/react';
+
 
 import {MdLightMode, MdLogout, MdDarkMode, MdAccountCircle} from 'react-icons/md'
 
@@ -17,6 +20,16 @@ const LMenu = () => {
   const { colorMode, toggleColorMode } = useColorMode();
 
   return (<>
+
+    <Box mx="5">
+      <Select>
+        <option>Inicio 💕</option>
+        <option>Agartha</option>
+        <option>Downton High Society</option>
+        <option>Downton High Society Mas Largo</option>
+      </Select>
+    </Box>
+
     <Menu
       closeOnSelect={false}
     >
@@ -33,7 +46,7 @@ const LMenu = () => {
       <MenuList 
         alignItems={'center'}
       >
-        <Center 
+        <Center
           pos="relative"
           _before={{
             content: '""',
@@ -48,11 +61,18 @@ const LMenu = () => {
             opacity: 0.5
           }}
         >
-          <Avatar
-          size='xl'
-          src='https://cdn.discordapp.com/avatars/254672103465418752/033ef5838d35f8ce1ec8646f83e5ce4a.png'
-          my="1"
-        />
+          <Box my="1">
+            <Center>
+              <Avatar
+                size='xl'
+                src='https://cdn.discordapp.com/avatars/254672103465418752/033ef5838d35f8ce1ec8646f83e5ce4a.png'
+                my="1"
+              />
+            </Center>
+            <Center opacity={1}>
+              <Heading size="md">KV#1048</Heading>
+            </Center>
+          </Box>
         </Center>
 
         <MenuDivider/>
