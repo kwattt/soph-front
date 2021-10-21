@@ -1,21 +1,22 @@
-import logo from './../../static/logo.webp'
+import logo from './../../static/logof.png'
 
 import {
   Box,
   Flex,
   useColorModeValue,
-  Image,
+  Avatar,
   IconButton,
-  Select,
 } from '@chakra-ui/react';
 
-import { useHistory  } from "react-router-dom"
+import { useHistory } from "react-router-dom"
 
-import {MdLogout} from 'react-icons/md'
+import {MdLogin} from 'react-icons/md'
 import LoggedMenu from './LoggedMenu'
+import { useContext } from 'react';
+import { UserContext } from '../../contexts/userContext';
 
 const Nav = () => {
-  const Logged = true
+  const {logged} = useContext(UserContext)
   const history = useHistory()
 
   return (
@@ -23,19 +24,21 @@ const Nav = () => {
       <Flex h={16} alignItems='center' justifyContent='space-between'>
 
         <Box>
-          <Image 
-            h="14" 
+          <Avatar
+            size="md"
             src={logo} 
             alt="logo"
             cursor="pointer"
+            border="solid 1px gray"
             onClick={()=> {history.push('/')}}
           />
         </Box>
 
-        {Logged ? <LoggedMenu/> : 
+        {logged ? <LoggedMenu/> : 
           <IconButton
-          aria-label="Desconectarse"
-          icon={<MdLogout />}
+          onClick={()=>{window.location.href = process.env.REACT_APP_BASE_URL + "/auth/login"}}
+          aria-label="Conectarse"
+          icon={<MdLogin />}
         />
         }
 

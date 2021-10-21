@@ -9,24 +9,30 @@ import {
   useColorMode,
   Box,
   Heading,
-  Input,
   Select,
 } from '@chakra-ui/react';
-
+import { useContext, useState } from 'react';
 
 import {MdLightMode, MdLogout, MdDarkMode, MdAccountCircle} from 'react-icons/md'
+import { UserContext } from '../../contexts/userContext';
+import { randomColor } from '../Other/Logo';
 
 const LMenu = () => {
   const { colorMode, toggleColorMode } = useColorMode();
+  const {user, guilds} = useContext(UserContext)
 
+  let banner = user.banner ? `url(${user.banner})` :  `linear-gradient(${randomColor()}, ${randomColor()})`
   return (<>
 
     <Box mx="5">
-      <Select>
-        <option>Inicio 💕</option>
-        <option>Agartha</option>
-        <option>Downton High Society</option>
-        <option>Downton High Society Mas Largo</option>
+      <Select
+        onChange={(e) => {console.log(e.target.value)}}
+        borderRadius="3"
+      >
+        <option value='0'>Inicio 💕</option>
+        {guilds.map(guild => {
+          return <option key={`g+${guild.id}`} value={guild.id}>{guild.name}</option> 
+        })}
       </Select>
     </Box>
 
@@ -34,7 +40,6 @@ const LMenu = () => {
       closeOnSelect={false}
     >
       <MenuButton
-        alt
         cursor='pointer'
         minW='0'>
         <Avatar
@@ -50,8 +55,7 @@ const LMenu = () => {
           pos="relative"
           _before={{
             content: '""',
-            bgImage:
-              "url(https://pbs.twimg.com/media/FB4VtF7X0AQDxpQ?format=png&name=small)",
+            bgImage: banner,
             bgSize: "cover",
             pos: "absolute",
             top: 0,
@@ -65,12 +69,12 @@ const LMenu = () => {
             <Center>
               <Avatar
                 size='xl'
-                src='https://cdn.discordapp.com/avatars/254672103465418752/033ef5838d35f8ce1ec8646f83e5ce4a.png'
+                src={user.avatar}
                 my="1"
               />
             </Center>
             <Center opacity={1}>
-              <Heading size="md">KV#1048</Heading>
+              <Heading size="md">{user.username}#{user.discriminator}</Heading>
             </Center>
           </Box>
         </Center>
@@ -85,6 +89,7 @@ const LMenu = () => {
           icon={colorMode === 'dark' ? <MdDarkMode/> : <MdLightMode/>}
         >Modo oscuro:  {colorMode === 'dark' ? 'Sí' : 'No'}</MenuItem>
         <MenuItem
+          onClick={()=>{window.location.href = process.env.REACT_APP_BASE_URL + "/auth/revoke"}}
           icon={<MdLogout/>}
         >Desconectarse</MenuItem>
       </MenuList>
