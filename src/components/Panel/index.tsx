@@ -1,5 +1,8 @@
+
 const Panel = () => {
-  return <></>
+  
+
+  return <>Panel XD</>
 }
 
 export default Panel

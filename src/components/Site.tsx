@@ -5,6 +5,7 @@ import {Box} from '@chakra-ui/react'
 import Nav from './Nav'
 import Homepage from './Homepage';
 import Footer from "./Page/Footer";
+import Panel from "./Panel";
 
 const Site = () => {
   return <>
@@ -17,6 +18,7 @@ const Site = () => {
       >
         <Switch>
           <Route path="/" component={Homepage} exact/>
+          <Route path="/panel" component={Panel} exact/>
           <Route path="*" component={c404}/>      
         </Switch>
       </Box>

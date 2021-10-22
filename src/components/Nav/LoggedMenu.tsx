@@ -11,7 +11,9 @@ import {
   Heading,
   Select,
 } from '@chakra-ui/react';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
+
+import {useHistory} from 'react-router-dom'
 
 import {MdLightMode, MdLogout, MdDarkMode, MdAccountCircle} from 'react-icons/md'
 import { UserContext } from '../../contexts/userContext';
@@ -19,15 +21,22 @@ import { randomColor } from '../Other/Logo';
 
 const LMenu = () => {
   const { colorMode, toggleColorMode } = useColorMode();
-  const {user, guilds} = useContext(UserContext)
+  const {user, guilds, current, setCurrent} = useContext(UserContext)
+  const history = useHistory()
 
   let banner = user.banner ? `url(${user.banner})` :  `linear-gradient(${randomColor()}, ${randomColor()})`
   return (<>
 
     <Box mx="5">
       <Select
-        onChange={(e) => {console.log(e.target.value)}}
+        onChange={(e) => {
+          setCurrent(e.target.value)
+          if(e.target.value === '0'){
+            history.push('/')
+          } else history.push('/panel')
+        }}
         borderRadius="3"
+        value={current}
       >
         <option value='0'>Inicio 💕</option>
         {guilds.map(guild => {

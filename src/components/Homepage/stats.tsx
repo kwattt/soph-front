@@ -8,8 +8,7 @@ type StatT = {
 } 
 
 const useStats = () : StatT => {
-
-  const [stats, setStats] = useState<StatT>({message: '', guilds: 0, users: 0})
+  const [stats, setStats] = useState<StatT>({message: '⌛', guilds: 0, users: 0})
 
   const fetchStatsData = () => {
     let _mounted = true 

@@ -16,8 +16,15 @@ import { useContext } from 'react';
 import { UserContext } from '../../contexts/userContext';
 
 const Nav = () => {
-  const {logged} = useContext(UserContext)
+  const {logged, setCurrent} = useContext(UserContext)
   const history = useHistory()
+
+  const redirectToHomepage = () => {
+    if(logged){
+      setCurrent(0)
+    }
+    history.push('/')
+  }
 
   return (
     <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
@@ -30,7 +37,7 @@ const Nav = () => {
             alt="logo"
             cursor="pointer"
             border="solid 1px gray"
-            onClick={()=> {history.push('/')}}
+            onClick={redirectToHomepage}
           />
         </Box>
 
