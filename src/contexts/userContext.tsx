@@ -1,13 +1,14 @@
 import axios from "axios"
-import {createContext, useState, useEffect, FC} from "react";
+import {createContext, useState, useEffect, FC, useContext} from "react";
 
 type UserCType = {
   logged: boolean,
   current: string,
   user: User,
   guilds: Guild[],
+  guild: Guild,
 
-  setCurrent: any
+  setCurrent: any,
 }
 
 const defaultContext : UserCType = {
@@ -23,6 +24,16 @@ const defaultContext : UserCType = {
     day: undefined
   },
   guilds: [],
+  guild: {
+    id: "0",
+    name: "none",
+    icon: undefined,
+    banner: undefined,
+    members: 0,
+    channels: [],
+    roles: []
+  },
+
   setCurrent: (val: string) => {}
 }
 
@@ -58,7 +69,6 @@ const UserProvider : FC = ({children}) => {
       _mounted = false
     }    
   }
-
 
   useEffect(() => {
 
@@ -97,13 +107,19 @@ const UserProvider : FC = ({children}) => {
   }, [])
 
   const setCurrent = (val: string) => {
-    setData(oldData => ({...oldData, current: val}))
+
+    const guildInfo = data.guilds.find(guild => guild.id === val)
+
+    if(guildInfo !== undefined){
+      setData(oldData => ({...oldData, current: val, guild: guildInfo}))
+    } else setData(oldData => ({...oldData, current: '0'}))
+
   }
 
   return <UserContext.Provider  
     value={{
       ...data,
-      setCurrent
+      setCurrent,
     }}
   >
     {children}

@@ -1,3 +1,5 @@
+type Views = typeof import('./constants').views[number]
+
 interface User {
   id: string,
   username: string,

@@ -46,7 +46,6 @@ const Homepage = () => {
     >
       <Box
         py="2"
-        mx={["2%", "6%", "10%", "20%"]}
         bg="gray.900"
         border="solid 3px"
         borderColor="gray.700"
@@ -78,7 +77,6 @@ const Homepage = () => {
         borderColor="gray.700"
         borderRadius="15px 5px 120px 20px / 205px 10px 10px 15px"
         py="2"
-        mx={["2%", "6%", "10%", "20%"]}
       >
         <Heading size="md">Stats! 📊</Heading>
         <List mt="10px" spacing="2">

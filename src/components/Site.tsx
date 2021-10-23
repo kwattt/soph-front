@@ -14,7 +14,9 @@ const Site = () => {
       <Box
         display="flex"
         flexDir="column"
-        minH="calc(92vh - 93px)"
+        minH="calc(92vh - 115px)"
+        my="5"
+        mx={["2%", "5%", "8%", "11%"]}
       >
         <Switch>
           <Route path="/" component={Homepage} exact/>
