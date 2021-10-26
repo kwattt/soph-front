@@ -26,7 +26,7 @@ return (<Box
             <Text as={ReachLink} to="/privacy">Aviso de privacidad</Text>
           </Stack>
         </HStack>
-        
+
       </Center>
   </Box>)
 }

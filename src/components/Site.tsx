@@ -14,7 +14,7 @@ const Site = () => {
       <Box
         display="flex"
         flexDir="column"
-        minH="calc(92vh - 115px)"
+        minH="calc(92vh - 120px)"
         my="5"
         mx={["2%", "5%", "8%", "11%"]}
       >

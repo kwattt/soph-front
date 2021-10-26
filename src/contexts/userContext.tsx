@@ -1,14 +1,14 @@
 import axios from "axios"
-import {createContext, useState, useEffect, FC, useContext} from "react";
+import {createContext, useState, useEffect, FC, useCallback} from "react";
 
-type UserCType = {
+export type UserCType = {
   logged: boolean,
   current: string,
   user: User,
   guilds: Guild[],
   guild: Guild,
 
-  setCurrent: any,
+  setCurrent: (current: string) => void,
 }
 
 const defaultContext : UserCType = {
@@ -96,25 +96,22 @@ const UserProvider : FC = ({children}) => {
         })
       }
       fetchData() 
-  
+
       return () => {
         _mounted = false
       }    
     }
 
-
     fetchUserData()
   }, [])
 
-  const setCurrent = (val: string) => {
-
+  const setCurrent = useCallback((val: string) => {
     const guildInfo = data.guilds.find(guild => guild.id === val)
 
     if(guildInfo !== undefined){
       setData(oldData => ({...oldData, current: val, guild: guildInfo}))
     } else setData(oldData => ({...oldData, current: '0'}))
-
-  }
+  }, [data.guilds])
 
   return <UserContext.Provider  
     value={{

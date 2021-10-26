@@ -30,3 +30,7 @@ interface Channel {
   name: string,
   type: string
 }
+
+interface Oraculo {
+  msg: string
+}

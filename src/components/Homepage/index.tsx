@@ -46,7 +46,7 @@ const Homepage = () => {
     >
       <Box
         py="2"
-        bg="gray.900"
+        //bg="gray.900"
         border="solid 3px"
         borderColor="gray.700"
         borderRadius="5px 15px 20px 120px / 10px 205px 15px 10px"
@@ -72,7 +72,7 @@ const Homepage = () => {
         </List>      
       </Box>      
       <Box
-        bg="gray.900"
+        //bg="gray.900"
         border="solid 3px"
         borderColor="gray.700"
         borderRadius="15px 5px 120px 20px / 205px 10px 10px 15px"

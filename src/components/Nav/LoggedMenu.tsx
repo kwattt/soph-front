@@ -11,18 +11,24 @@ import {
   Heading,
   Select,
 } from '@chakra-ui/react';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 
-import {useHistory} from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
 
-import {MdLightMode, MdLogout, MdDarkMode, MdAccountCircle} from 'react-icons/md'
+import { MdLightMode, MdLogout, MdDarkMode, MdAccountCircle } from 'react-icons/md'
 import { UserContext } from '../../contexts/userContext';
 import { randomColor } from '../Other/Logo';
 
 const LMenu = () => {
   const { colorMode, toggleColorMode } = useColorMode();
-  const {user, guilds, current, setCurrent} = useContext(UserContext)
+  const { user, guilds, current, setCurrent } = useContext(UserContext)
   const history = useHistory()
+  const location = useLocation()
+
+  useEffect(() => {
+    if(location.pathname !== '/panel')
+      setCurrent('0')
+  }, [location, setCurrent])
 
   let banner = user.banner ? `url(${user.banner})` :  `linear-gradient(${randomColor()}, ${randomColor()})`
   return (<>
