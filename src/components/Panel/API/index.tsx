@@ -6,8 +6,8 @@ import { UserContext } from '../../../contexts/userContext'
 const useApi = (endpoint: string) => {
   const {current} = useContext(UserContext)
 
-  const [data, setData] = useState<any>({})
-  const [error, setError] = useState<null | number>(null)
+  const [data, setData] = useState<any>(null)
+  const [error, setError] = useState<boolean | number>(false)
   const [loading, setLoading] = useState<boolean>(false)
 
   useEffect(() => {
@@ -27,6 +27,6 @@ const useApi = (endpoint: string) => {
   return {data, error, loading}
 }
 
-export {default as updateApi} from './update'
+export {default as useUpdateApi} from './update'
 
 export default useApi;

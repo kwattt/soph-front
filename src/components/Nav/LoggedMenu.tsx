@@ -59,7 +59,7 @@ const LMenu = () => {
         minW='0'>
         <Avatar
           size='sm'
-          src='https://cdn.discordapp.com/avatars/254672103465418752/033ef5838d35f8ce1ec8646f83e5ce4a.png'
+          src={user.avatar}
         />
       </MenuButton>
 

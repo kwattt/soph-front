@@ -1,16 +1,34 @@
 import axios from 'axios';
+import { useContext, useEffect, useState } from 'react';
+import { UserContext } from '../../../contexts/userContext';
 
-const updateApi = (endpoint: string, data : any) => {
-  const updateData = async () => {
-    await axios.post(endpoint, data).then(response => {
-      return response.status
-    }).catch(error => {
-      console.log(error);
-      if(error.response)
-        return error.response.status
-    })
-  }
-  updateData()
+/*
+  UpdateStatus:
+    0: Nothing
+    1: Updated
+    2: Failed
+*/
+
+const useUpdateApi = async (endpoint: string, data: any, ogData: any) => {
+  const {current} = useContext(UserContext)
+  const [updateStatus, setUpdateStatus] = useState(0)
+
+  useEffect(() => {
+    const updateData = async (endpoint: string, data: any) =>  {
+      await axios.post(process.env.REACT_APP_BASE_URL + '/API' + endpoint, data, 
+      {withCredentials: true, params: {guild: current}})
+        .then(response => {
+
+        }).catch(error => {
+
+        })
+    }
+
+    if(data !== ogData)
+      updateData(endpoint, data)
+  }, [data])
+
+  return updateStatus
 }
 
-export default updateApi;
+export default useUpdateApi;
