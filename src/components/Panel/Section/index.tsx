@@ -1,7 +1,37 @@
+import {
+  Box,
+  Flex,
+  useBreakpointValue
+} from "@chakra-ui/react"
+import { ReactChild, ReactChildren } from "react";
 
+export const SectionC = ({children} : {children: ReactChild | ReactChild[] | ReactChildren | ReactChildren[]}) => {
+  const size = useBreakpointValue({
+    base: "90%",
+    sm: "80%",
+    md: "75%",
+    lg: "46%",
+    xl: "40%"
+  })
 
-const Section = () => {
-  return <></>
+  return <Box
+    borderLeft="solid 1px rgba(255, 255, 255, 0.2)"
+    padding="4"
+    minW={size}
+    mx="2"
+    my="2"
+  >
+    {children}
+  </Box>
 }
 
-export default Section;
+const Section = ({children} : {children: ReactChild | ReactChild[] | ReactChildren | ReactChildren[]}) => {
+  return <Flex
+    justifyContent="center"
+    flexFlow="wrap"
+  >
+    {children}
+  </Flex>
+}
+
+export default Section

@@ -7,13 +7,15 @@ import {
 } from "@chakra-ui/react"
 import { useEffect, useState } from "react"
 import { useDebounce } from "use-debounce"
+import { UpdateStatus } from "../Other"
+import LoadStatus, { loadingData } from "../Other/LoadStatus"
 import useApi, {useUpdateApi} from "./../API"
 
 const Oraculo = () => {
   const {data, loading, error} = useApi("/messages/oraculo")
-  const [newData, setNewData] = useState<Oraculo[]>([])
+  const [newData, setNewData] = useState<Oraculo[]>(data)
   const [debounceData] = useDebounce(newData, 1200)
-  //const updateStatus = updateApi("/messages/oraculo", debounceData)
+  const updateStatus = useUpdateApi("/messages/updateOraculo", debounceData, data)
 
   useEffect(() => {
     if(data)
@@ -32,28 +34,25 @@ const Oraculo = () => {
     setNewData(newArray)
   }
 
-  if (loading) return <div>Loading...</div>
-  if (error) return <div>Error!.. actualizar, si el error persiste avisame XD</div>
-  if(!data) return <div>No hay datos</div>
+  if(loadingData(loading, error, !data)){
+    return <LoadStatus load={loading} error={error} data={!data}/>
+  }
 
-  return <Box 
-    maxH="400px"
-    overflowY="auto"
-  >
+  return <>
     <Center> <Heading>Oraculo</Heading> </Center>
     <br/>
 
     <Box>
       {newData.map((or: Oraculo, id: number) => {
-        return <Box>
-          <Flex>
-            <Input value={or.msg} key={"or"+id} borderRadius="0" size="sm" onChange={(e) => {handleChange(e, id)}}/>
-            <button key={"ord"+id} onClick={()=>{deleteElement(id)}}>X</button>
-          </Flex>
-        </Box>
+        return <Flex key={"ora"+id}>
+          <Input value={or.msg} borderRadius="0" size="sm" onChange={(e) => {handleChange(e, id)}}/>
+          <button onClick={()=>{deleteElement(id)}}>X</button>
+        </Flex>
       })}
     </Box>
-  </Box>
+
+    <UpdateStatus status={updateStatus}/>
+  </>
 }
 
 export default Oraculo

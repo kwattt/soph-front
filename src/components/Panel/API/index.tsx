@@ -11,17 +11,32 @@ const useApi = (endpoint: string) => {
   const [loading, setLoading] = useState<boolean>(false)
 
   useEffect(() => {
+    let _mounted  = true
+
     const fetchData = async () => {
       setLoading(true)
       await axios.get(process.env.REACT_APP_BASE_URL + '/API' + endpoint, {withCredentials: true, params: {guild: current}}).then(response => {
+        if(_mounted)
         setData(response.data)
       }).catch(error => {
-        setError(error)
-      }).finally(() => {
-        setLoading(false)
+
+        if(error.response && _mounted)
+          setError(error.response.status)
+        else 
+          if(_mounted)
+            setError(500)
+
+        }).finally(() => {
+          setLoading(false)
       })
     }
+
     fetchData()
+
+    return () => {
+      _mounted = false
+    }
+
   }, [endpoint, current]) 
 
   return {data, error, loading}

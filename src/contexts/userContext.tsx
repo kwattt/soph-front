@@ -109,6 +109,7 @@ const UserProvider : FC = ({children}) => {
     const guildInfo = data.guilds.find(guild => guild.id === val)
 
     if(guildInfo !== undefined){
+      axios.get(process.env.REACT_APP_BASE_URL + "/api/guild/getGuild", {withCredentials: true, params: {guild: val}})
       setData(oldData => ({...oldData, current: val, guild: guildInfo}))
     } else setData(oldData => ({...oldData, current: '0'}))
   }, [data.guilds])

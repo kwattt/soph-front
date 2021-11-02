@@ -1,15 +1,12 @@
-import {
-  Box
-} from "@chakra-ui/react"
 import Oraculo from "./Oraculo"
+import Section, {SectionC} from "../Section"
 
 const Messages = () => {
-  return <Box>
-    <Box width="30%">
+  return <Section>
+    <SectionC>
       <Oraculo />
-    </Box>
-
-  </Box>
+    </SectionC>
+  </Section>
 }
 
 export default Messages
