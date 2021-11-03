@@ -2,16 +2,25 @@ import {
   Box,
   Input,
   Flex,
+  Button,
   Heading,
-  Center
+  Center,
+  IconButton,
+  Tooltip
 } from "@chakra-ui/react"
-import { useEffect, useState } from "react"
+
+import { useContext, useEffect, useState } from "react"
 import { useDebounce } from "use-debounce"
-import { UpdateStatus } from "../Other"
-import LoadStatus, { loadingData } from "../Other/LoadStatus"
+import { ToolText, UpdateStatus } from "../Other"
+import { loadingData, LoadStatus } from "./../Other"
 import useApi, {useUpdateApi} from "./../API"
 
+import { MdDeleteForever } from 'react-icons/md'
+import { UserContext } from "../../../contexts/userContext"
+
 const Oraculo = () => {
+  const {guild} = useContext(UserContext)
+
   const {data, loading, error} = useApi("/messages/oraculo")
   const [newData, setNewData] = useState<Oraculo[]>(data)
   const [debounceData] = useDebounce(newData, 1200)
@@ -21,6 +30,10 @@ const Oraculo = () => {
     if(data)
       setNewData(data)
   }, [data])
+
+  if(loadingData(loading, error, !data)){
+    return <LoadStatus load={loading} error={error} data={!data}/>
+  }
 
   const handleChange = (e: any, id: number) => {
     var newstate = [...newData]
@@ -34,22 +47,48 @@ const Oraculo = () => {
     setNewData(newArray)
   }
 
-  if(loadingData(loading, error, !data)){
-    return <LoadStatus load={loading} error={error} data={!data}/>
+  const newElement = () => {
+    var newArray = [...newData, {msg: "Nuevo"}]
+    setNewData(newArray)
   }
 
   return <>
     <Center> <Heading>Oraculo</Heading> </Center>
     <br/>
 
-    <Box>
+    <Box mx="10%">
       {newData.map((or: Oraculo, id: number) => {
-        return <Flex key={"ora"+id}>
-          <Input value={or.msg} borderRadius="0" size="sm" onChange={(e) => {handleChange(e, id)}}/>
-          <button onClick={()=>{deleteElement(id)}}>X</button>
+        return <Flex key={"ora"+id} mb="1">
+          <Input value={or.msg} maxLength={200} borderRadius="0" size="sm" onChange={(e) => {handleChange(e, id)}}/>
+          <IconButton 
+            onClick={()=>{deleteElement(id)}} 
+            aria-label="Eliminar" 
+            size="sm"
+            color="red.400"
+            borderRadius="0"
+            icon={<MdDeleteForever/>}
+          />
         </Flex>
       })}
     </Box>
+
+    <Center>
+      <Button
+        onClick={newElement} 
+        my="2"
+        color="green.400" 
+        size="sm" 
+        borderRadius="0"
+      >
+        Nuevo
+      </Button>
+
+      <ToolText tooltip={`${guild.limits.oraculo} respuestas de máximo 200 carácteres`}>
+        Limites
+      </ToolText>
+
+    </Center>
+
 
     <UpdateStatus status={updateStatus}/>
   </>

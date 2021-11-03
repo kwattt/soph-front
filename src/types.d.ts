@@ -9,6 +9,16 @@ interface User {
   month: number | undefined,
   day: number | undefined,
 }
+ 
+interface Limits {
+  oraculo: number,
+  welcome: number,
+  stalkmsg: number,
+  shops: number,
+  socials: number,
+  autochannel: number,
+  purge: number,
+}
 
 interface Guild {
   id: string,
@@ -18,6 +28,7 @@ interface Guild {
   members: number,
   channels: Channel[],
   roles: Role[]
+  limits: Limits
 }
 
 interface Role {

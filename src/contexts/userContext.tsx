@@ -31,7 +31,16 @@ const defaultContext : UserCType = {
     banner: undefined,
     members: 0,
     channels: [],
-    roles: []
+    roles: [],
+    limits: {
+      oraculo: 20,
+      welcome: 40,
+      stalkmsg: 20,
+      shops: 10,
+      socials: 5,
+      autochannel: 5,
+      purge: 5
+    }
   },
 
   setCurrent: (val: string) => {}
@@ -108,10 +117,26 @@ const UserProvider : FC = ({children}) => {
   const setCurrent = useCallback((val: string) => {
     const guildInfo = data.guilds.find(guild => guild.id === val)
 
+    const fetchGuild = async () => {
+      await axios.get<Guild>(process.env.REACT_APP_BASE_URL + "/api/guild/getGuild", {withCredentials: true, params: {guild: val}}).then((res) => {
+        if(guildInfo !== undefined)
+          setData(oldData => ({...oldData, current: val, guild: {...guildInfo, limits: res.data.limits}}))
+        }).catch((err) => {
+        if(err.response){
+          if(err.response.status === 401)
+            return
+        }
+        console.log(err)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    }
+
     if(guildInfo !== undefined){
-      axios.get(process.env.REACT_APP_BASE_URL + "/api/guild/getGuild", {withCredentials: true, params: {guild: val}})
-      setData(oldData => ({...oldData, current: val, guild: guildInfo}))
-    } else setData(oldData => ({...oldData, current: '0'}))
+      fetchGuild()
+    } else setData(oldData => ({...oldData, current: '0'}))  
+
   }, [data.guilds])
 
   return <UserContext.Provider  
