@@ -6,7 +6,6 @@ import {
   Heading,
   Center,
   IconButton,
-  Tooltip
 } from "@chakra-ui/react"
 
 import { useContext, useEffect, useState } from "react"
@@ -17,6 +16,7 @@ import useApi, {useUpdateApi} from "./../API"
 
 import { MdDeleteForever } from 'react-icons/md'
 import { UserContext } from "../../../contexts/userContext"
+import ParsedInput from "../Other/ParsedInput"
 
 const Oraculo = () => {
   const {guild} = useContext(UserContext)
@@ -53,7 +53,12 @@ const Oraculo = () => {
   }
 
   return <>
-    <Center> <Heading>Oraculo</Heading> </Center>
+    <Box textAlign="center">
+      <Heading>Oraculo</Heading>
+      <ToolText tooltip={`${guild.limits.oraculo} respuestas de máximo 200 carácteres`}>
+        Limites
+      </ToolText>
+    </Box>
     <br/>
 
     <Box mx="10%">
@@ -71,6 +76,12 @@ const Oraculo = () => {
         </Flex>
       })}
     </Box>
+    
+    <Box mx="10%">
+      <Flex>
+      <ParsedInput text="lol! el {} es tonto! {} "/>
+      </Flex>
+    </Box>
 
     <Center>
       <Button
@@ -82,11 +93,6 @@ const Oraculo = () => {
       >
         Nuevo
       </Button>
-
-      <ToolText tooltip={`${guild.limits.oraculo} respuestas de máximo 200 carácteres`}>
-        Limites
-      </ToolText>
-
     </Center>
 
 

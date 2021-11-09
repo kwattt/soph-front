@@ -13,7 +13,7 @@ import {
 } from '@chakra-ui/react';
 import { useContext, useEffect } from 'react';
 
-import { useHistory, useLocation } from 'react-router-dom'
+import { useLocation, Redirect } from 'react-router-dom'
 
 import { MdLightMode, MdLogout, MdDarkMode, MdAccountCircle } from 'react-icons/md'
 import { UserContext } from '../../contexts/userContext';
@@ -22,13 +22,17 @@ import { randomColor } from '../Other/Logo';
 const LMenu = () => {
   const { colorMode, toggleColorMode } = useColorMode();
   const { user, guilds, current, setCurrent } = useContext(UserContext)
-  const history = useHistory()
   const location = useLocation()
 
   useEffect(() => {
     if(location.pathname !== '/panel')
       setCurrent('0')
   }, [location, setCurrent])
+
+  if(current !== "0" && location.pathname !== "/panel")
+    return <Redirect to="/panel" />
+  if(current === "0" && location.pathname === "/panel")
+    return <Redirect to="/" />
 
   let banner = user.banner ? `url(${user.banner})` :  `linear-gradient(${randomColor()}, ${randomColor()})`
   return (<>
@@ -37,9 +41,6 @@ const LMenu = () => {
       <Select
         onChange={(e) => {
           setCurrent(e.target.value)
-          if(e.target.value === '0'){
-            history.push('/')
-          } else history.push('/panel')
         }}
         borderRadius="3"
         value={current}

@@ -3,7 +3,6 @@ import Panel from "./Panel";
 import Switcher from "./Switcher/Switcher";
 
 import {UserContext} from './../../contexts/userContext'
-import {useHistory} from 'react-router-dom'
 import { 
   useBreakpointValue,
   Box,
@@ -17,10 +16,6 @@ const PanelWrap = () => {
   const deviceMobile = useBreakpointValue({base: true, md: false})
 
   const {current} = useContext(UserContext)
-  const history = useHistory()
-
-  if(current === '0')
-    history.push('/')
 
   useEffect(() => {
     setView('info')
