@@ -17,7 +17,7 @@ export const SectionC = ({children} : {children: ReactChild | ReactChild[] | Rea
   return <Box
     borderLeft="solid 1px rgba(255, 255, 255, 0.2)"
     padding="4"
-    minW={size}
+    maxW={size}
     mx="2"
     my="2"
   >

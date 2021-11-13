@@ -1,11 +1,12 @@
 import { 
   Box,
-  Input,
   Flex,
   Button,
   Heading,
   Center,
   IconButton,
+  Kbd,
+  Text,
 } from "@chakra-ui/react"
 
 import { useContext, useEffect, useState } from "react"
@@ -27,8 +28,15 @@ const Oraculo = () => {
   const updateStatus = useUpdateApi("/messages/updateOraculo", debounceData, data)
 
   useEffect(() => {
-    if(data)
+    let _mounted = true
+    
+    if(data && _mounted) 
       setNewData(data)
+
+    return () => {
+      _mounted = false
+    }
+
   }, [data])
 
   if(loadingData(loading, error, !data)){
@@ -58,13 +66,21 @@ const Oraculo = () => {
       <ToolText tooltip={`${guild.limits.oraculo} respuestas de máximo 200 carácteres`}>
         Limites
       </ToolText>
+      <Text>Las opciones de oráculo te permiten editar los mensajes de respuesta de <Kbd>/oraculo</Kbd></Text>
     </Box>
     <br/>
 
-    <Box mx="10%">
+    <Box mx="10%" maxH="230px" overflowY="auto">
       {newData.map((or: Oraculo, id: number) => {
         return <Flex key={"ora"+id} mb="1">
-          <Input value={or.msg} maxLength={200} borderRadius="0" size="sm" onChange={(e) => {handleChange(e, id)}}/>
+          <ParsedInput 
+            overflow="hidden"
+            text={or.msg} 
+            maxLength={200} 
+            size="sm" 
+            onChange={(e) => {handleChange(e, id)}}
+          />
+
           <IconButton 
             onClick={()=>{deleteElement(id)}} 
             aria-label="Eliminar" 
@@ -77,12 +93,6 @@ const Oraculo = () => {
       })}
     </Box>
     
-    <Box mx="10%">
-      <Flex>
-      <ParsedInput text="lol! el {} es tonto! {} "/>
-      </Flex>
-    </Box>
-
     <Center>
       <Button
         onClick={newElement} 

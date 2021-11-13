@@ -14,12 +14,11 @@ import {
 const PanelWrap = () => {
   const [view, setView] = useState<Views>('info')
   const deviceMobile = useBreakpointValue({base: true, md: false})
-
-  const {current} = useContext(UserContext)
+  const {current, guild} = useContext(UserContext)
 
   useEffect(() => {
     setView('info')
-  }, [current])
+  }, [current, guild])
 
   if(deviceMobile)
     return <Box>

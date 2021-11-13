@@ -1,10 +1,10 @@
 import axios from 'axios'
-import { useState, useEffect, useContext } from 'react'
+import { useState, useEffect, useContext, useRef } from 'react'
 
 import { UserContext } from '../../../contexts/userContext'
 
 const useApi = (endpoint: string) => {
-  const {current} = useContext(UserContext)
+  const {current} = useRef(useContext(UserContext).current)
 
   const [data, setData] = useState<any>(null)
   const [error, setError] = useState<boolean | number>(false)

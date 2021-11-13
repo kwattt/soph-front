@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState, useRef } from 'react';
 import { UserContext } from '../../../contexts/userContext';
 
 /*
@@ -11,8 +11,9 @@ import { UserContext } from '../../../contexts/userContext';
 */
 
 const useUpdateApi = (endpoint: string, data: any, ogData: any) => {
-  const {current} = useContext(UserContext)
+  const {current} = useRef(useContext(UserContext).current)
   const [updateStatus, setUpdateStatus] = useState(0)
+
 
   useEffect(() => {
     let _mounted = true;
@@ -46,7 +47,7 @@ const useUpdateApi = (endpoint: string, data: any, ogData: any) => {
       _mounted = false
     }
 
-  }, [data, endpoint, current, ogData])
+  }, [data, endpoint, ogData, current])
 
   return updateStatus
 }
