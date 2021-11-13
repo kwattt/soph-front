@@ -45,3 +45,8 @@ interface Channel {
 interface Oraculo {
   msg: string
 }
+
+interface Reminders {
+  name: string
+  message: string
+}

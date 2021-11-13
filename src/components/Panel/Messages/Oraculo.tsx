@@ -18,6 +18,7 @@ import useApi, {useUpdateApi} from "./../API"
 import { MdDeleteForever } from 'react-icons/md'
 import { UserContext } from "../../../contexts/userContext"
 import ParsedInput from "../Other/ParsedInput"
+import AddButton from "../Other/AddButton"
 
 const Oraculo = () => {
   const {guild} = useContext(UserContext)
@@ -94,17 +95,12 @@ const Oraculo = () => {
     </Box>
     
     <Center>
-      <Button
-        onClick={newElement} 
-        my="2"
-        color="green.400" 
-        size="sm" 
-        borderRadius="0"
-      >
-        Nuevo
-      </Button>
+      <AddButton
+        limit={guild.limits.oraculo}
+        currentl={newData.length}
+        onClick={newElement}
+      />
     </Center>
-
 
     <UpdateStatus status={updateStatus}/>
   </>

@@ -9,6 +9,7 @@ import {useState} from "react"
 
 interface ParsedInputProps extends InputProps {
   text: string
+  noparse?: boolean
 }
 
 type parsedText = {
@@ -39,7 +40,8 @@ const ParsedInput = (props: ParsedInputProps) => {
     styleConfig 
   })
 
-  if(parsedText.includes("{}")) {
+
+  if(parsedText.includes("{}") && !props.noparse){
     while(parsedText.includes("{}")){
       let index = parsedText.indexOf("{}")
       newText = [...newText, {
@@ -80,13 +82,12 @@ const ParsedInput = (props: ParsedInputProps) => {
     myStyle = {...myStyle, ...hacky.field}
 
   return <Box
-    sx={myStyle}
-    {...rest}
+  __css={myStyle}
+  {...props}
     onClick={() => {
       setInputState(1)
     }}
     cursor="pointer"
-    {...props}
     whiteSpace="nowrap"
   >
     {newText.map((val, id) => {
