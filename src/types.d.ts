@@ -55,3 +55,8 @@ interface WMessage {
   msg: string
   type: number
 }
+
+interface Stalk {
+  roles: Array<string>
+  messages: Array<string>
+}

@@ -5,29 +5,39 @@ import Messages from "./Messages"
 
   TODO:
     FUNCS:
-      oraculo ✅
-      reminders ✅
-      welcome ✅
+      Messages:
+        oraculo ✅
+        reminders ✅
+        welcome ✅
+        stalk
 
-      autochannel
-      bday
-      purge
-      stalk
-      facebook
-      twitch
-      twitter
-      youtube
-      levels
-      shop
-      user
+      Socials:
+        facebook
+        twitch
+        twitter
+        youtube
+
+      Extras:
+        autochannel
+        bday
+        purge
+
+      Niveles:
+        levels
+        shop
+
+      User: 
 */
 
 function Panel({view}: {view: Views}) {
   if(view === 'info')
     return <Info/>
 
-    if (view === 'messages')
+  if (view === 'messages')
     return <Messages/>
+
+  if (view === 'socials')
+    return <>lmao</>
 
   return <>Uhm, alguien está jugando con las variables 🧁</>
 }

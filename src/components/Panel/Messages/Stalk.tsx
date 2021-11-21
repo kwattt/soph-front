@@ -5,6 +5,9 @@ import {
   Center,
   IconButton,
   Text,
+  Stack,
+  Checkbox,
+  CheckboxGroup
 } from "@chakra-ui/react"
 import { ToolText, UpdateStatus } from "../Other";
 import useApi, {useUpdateApi} from "./../API"
@@ -15,112 +18,84 @@ import { loadingData, LoadStatus } from "./../Other"
 import { MdDeleteForever } from 'react-icons/md'
 import ParsedInput from "../Other/ParsedInput";
 import AddButton from "../Other/AddButton";
+import RoleSelector from "../Other/RoleSelector";
 
-const Welcome = () => {
+type StringOrNumber = string | number
+
+const Stalk = () => {
   const {guild} = useContext(UserContext)
 
-  const {data, loading, error} = useApi("/messages/welcome")
-  const [newData, setNewData] = useState<WMessage[]>(data)
+  const {data, loading, error} = useApi("/misc/stalk")
+  const [newData, setNewData] = useState<Stalk>(data)
   const [debounceData] = useDebounce(newData, 1200)
-  const updateStatus = useUpdateApi("/messages/updateWelcome", debounceData, data)
+  const updateStatus = useUpdateApi("/misc/updateStalk", debounceData, data)
 
   useEffect(() => {
     let _mounted = true
-    
     if(data && _mounted) 
       setNewData(data)
 
     return () => {
       _mounted = false
     }
-
   }, [data])
 
   if(loadingData(loading, error, !data)){
     return <LoadStatus load={loading} error={error} data={!data}/>
   }
 
+  const updateRoles = (roles: StringOrNumber[]) => {
+    setNewData(oldData => ({...oldData, roles: roles.map(r => r.toString())}))
+  }
 
   const handleChangeText = (e: any, id: number) => {
-    var newstate = [...newData]
-    newstate[id].msg = e.target.value
-    setNewData(newstate)
+    var newstate = [...newData.messages]
+    newstate[id] = e.target.value
+    setNewData(oldData => ({...oldData, messages: newstate}))
   }
 
   const deleteElement = (id:number) => {
-    var newArray = [...newData]
+    var newArray = [...newData.messages]
     newArray.splice(id, 1)
-    setNewData(newArray)
+    setNewData(oldData => ({...oldData, messages: newArray}))
   }
 
   const newElement = (type: number) => {
-    var newArray = [...newData, {type: type, msg: "Nuevo"}]
-    setNewData(newArray)
+    var newArray = [...newData.messages, "Nuevo"]
+    setNewData(oldData => ({...oldData, messages: newArray}))
   }
 
   return <>
     <Box textAlign="center">
-      <Heading>Entrada/Salida</Heading>
-      <ToolText tooltip={`${guild.limits.welcome} mensajes de máximo 200 carácteres.`}>
+      <Heading>Stalk mensajes</Heading>
+      <ToolText tooltip={`${guild.limits.stalkmsg} mensajes de máximo 200 carácteres.`}>
         Limites
       </ToolText>
-      <Text>Las opciones de Entrada/Salida te permite los mensajes de entrada/salida de un usuario al servidor.</Text>
+      <Text>Las opciones de Stalk te permite agregar mensajes que se muestran aleatoriamente como respuesta. (0.1%)</Text>
     </Box>
     <br/>
 
     <Box>
-      <Heading textAlign="center" size="md" as="h3">Entrada</Heading>
-      <Box mx="5%" px="5%" maxH="200px" overflowY="auto">
-      {newData.map((m, i) => {
-
-        if(m.type === 1)
-          return ""
-
-        return <Box key={`re+${i}`} mt="2">
-        <Flex>
-          <ParsedInput 
-            maxLength={50}
-            overflow="hidden"
-            text={m.msg} 
-            size="sm" 
-            onChange={(e) => {handleChangeText(e, i)}}
-          />
-          <IconButton 
-            onClick={()=>{deleteElement(i)}} 
-            aria-label="Eliminar" 
-            size="sm"
-            color="red.400"
-            borderRadius="0"
-            icon={<MdDeleteForever/>}
-          />
-          </Flex>
-        </Box>
-      })}
+      <Heading textAlign="center" size="md" as="h3">Roles</Heading>
+      <Box mx="5%" px="5%">
+        <RoleSelector
+          onChange={(e) => {updateRoles(e)}}
+          defaultValue={newData.roles}
+        />    
       </Box>
-
-      <Center>
-        <AddButton
-          onClick={()=>{newElement(0)}}
-          currentl={newData.length}
-          limit={guild.limits.welcome}
-        />
-      </Center>
     </Box>
 
-    <Box>
-      <Heading textAlign="center" size="md" as="h3">Salida</Heading>
+    <Box mt="10">
+      <Heading textAlign="center" size="md" as="h3">Mensajes</Heading>
       <Box mx="5%" px="5%" maxH="200px" overflowY="auto">
-      {newData.map((m, i) => {
-
-        if(m.type === 0)
-          return ""
-
+      {newData.messages.map((m, i) => {
+        console.log(m)
         return <Box key={`re+${i}`} mt="2">
         <Flex>
           <ParsedInput 
             maxLength={50}
             overflow="hidden"
-            text={m.msg} 
+            text={m} 
             size="sm" 
             onChange={(e) => {handleChangeText(e, i)}}
           />
@@ -136,19 +111,17 @@ const Welcome = () => {
         </Box>
       })}
       </Box>
-
       <Center>
         <AddButton
           onClick={()=>{newElement(1)}}
-          currentl={newData.length}
+          currentl={newData.messages.length}
           limit={guild.limits.welcome}
         />
       </Center>
     </Box>
 
     <UpdateStatus status={updateStatus}/>
-
   </>
 }
 
-export default Welcome
+export default Stalk

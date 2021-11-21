@@ -24,11 +24,11 @@ const Switcher = ({setView, view} : {setView: React.Dispatch<React.SetStateActio
       onChange={(value)=> {
         setView(viewsDict[value])
       }}
-    >  
+    >   
       <TabList>
-        <SwitchTab view={'info'} title="Server Info"/>
+        <SwitchTab view={'info'} title="Servidor"/>
         <SwitchTab view={'messages'} title="Mensajes"/>
-        <SwitchTab view={'messages2'} title="Mensajes 2"/>
+        <SwitchTab view={'socials'} title="Sociales"/>
       </TabList>
     </Tabs>
 

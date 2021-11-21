@@ -39,7 +39,6 @@ const ParsedInput = (props: ParsedInputProps) => {
     styleConfig 
   })
 
-
   if(parsedText.includes("{}") && !props.noparse){
     while(parsedText.includes("{}")){
       let index = parsedText.indexOf("{}")
