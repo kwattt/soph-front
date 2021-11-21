@@ -7,7 +7,7 @@ import Messages from "./Messages"
     FUNCS:
       oraculo ✅
       reminders ✅
-      welcome 
+      welcome ✅
 
       autochannel
       bday

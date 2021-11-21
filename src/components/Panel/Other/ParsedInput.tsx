@@ -28,9 +28,8 @@ const ParsedInput = (props: ParsedInputProps) => {
     size,
     colorScheme,
     orientation, 
-    children, 
     styleConfig,
-    ...rest } = props
+    } = props
 
   const styles = useStyleConfig("ParsedInput", { 
     variant,

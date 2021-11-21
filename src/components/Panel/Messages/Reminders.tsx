@@ -1,7 +1,7 @@
 import { 
   Box,
   Flex,
-  Button,
+  Input,
   Heading,
   Center,
   IconButton,
@@ -16,7 +16,6 @@ import { useContext, useEffect, useState } from "react"
 import { UserContext } from "../../../contexts/userContext";
 import { loadingData, LoadStatus } from "./../Other"
 import { MdDeleteForever } from 'react-icons/md'
-import ParsedInput from "../Other/ParsedInput";
 import AddButton from "../Other/AddButton";
 
 const Reminders = () => {
@@ -81,12 +80,11 @@ const Reminders = () => {
       {newData.map((element, id) => {
         return <Box key={`re+${id}`} mt="2">
           <Flex>
-            <ParsedInput 
+            <Input 
               maxLength={50}
               width="50%"
-              noparse={true}
               overflow="hidden"
-              text={element.name} 
+              value={element.name} 
               size="sm" 
               onChange={(e) => {handleChangeName(e, id)}}
             />
@@ -108,7 +106,6 @@ const Reminders = () => {
           </Box>
       })}
     </Box>
-
 
     <Center>
       <AddButton

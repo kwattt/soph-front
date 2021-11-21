@@ -3,7 +3,9 @@ import {
   TabList,
   useBreakpointValue,
   UseTabsProps,
-  Box
+  PositionProps,
+  Box,
+  ResponsiveValue
 } from "@chakra-ui/react"
 
 import SwitchTab from "./SwitchTab"
@@ -11,10 +13,12 @@ import {views} from './../../../constants'
 
 const Switcher = ({setView, view} : {setView: React.Dispatch<React.SetStateAction<Views>>, view: Views}) => {
   const tabOrientation : UseTabsProps["orientation"] = useBreakpointValue({'base': 'horizontal', 'md': 'vertical'})
+  const tabPosition : ResponsiveValue<PositionProps["position"]> | undefined = useBreakpointValue({'base': 'static', 'md': 'fixed'})
 
   return <Box overflowX="auto"> 
 
     <Tabs
+      position={tabPosition}
       orientation={tabOrientation}
       index={views.indexOf(view)}
       onChange={(value)=> {

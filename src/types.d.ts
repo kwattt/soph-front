@@ -50,3 +50,8 @@ interface Reminders {
   name: string
   message: string
 }
+
+interface WMessage {
+  msg: string
+  type: number
+}

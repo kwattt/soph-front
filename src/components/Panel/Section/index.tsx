@@ -27,7 +27,6 @@ export const SectionC = ({children} : {children: ReactChild | ReactChild[] | Rea
 
 const Section = ({children} : {children: ReactChild | ReactChild[] | ReactChildren | ReactChildren[]}) => {
   return <Flex
-    justifyContent="center"
     flexFlow="wrap"
   >
     {children}

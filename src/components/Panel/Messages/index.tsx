@@ -1,6 +1,7 @@
 import Oraculo from "./Oraculo"
 import Section, {SectionC} from "../Section"
 import Reminders from "./Reminders"
+import Welcome from "./Welcome"
 
 const Messages = () => {
   return <Section>
@@ -9,6 +10,9 @@ const Messages = () => {
     </SectionC>
     <SectionC>
       <Reminders />
+    </SectionC>
+    <SectionC>
+      <Welcome />
     </SectionC>
   </Section>
 }
