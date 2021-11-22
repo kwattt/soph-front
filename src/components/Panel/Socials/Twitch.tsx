@@ -156,9 +156,9 @@ const Twitch = () => {
 
               <Heading size="sm" as="h5" mt="2">Alerta</Heading>
               <RadioGroup value={String(currentSocial.type)} onChange={(e) => {onTypeChange(Number(e))}}>
-                <Radio value="0">Ninguna</Radio>
-                <Radio value="1">@here</Radio>
-                <Radio value="2">@everyone</Radio>
+                <Radio mr="2" value="0">Ninguna</Radio>
+                <Radio mr="2" value="1">@here</Radio>
+                <Radio mr="2" value="2">@everyone</Radio>
               </RadioGroup>
 
             </ModalBody>

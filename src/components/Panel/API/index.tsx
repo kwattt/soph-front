@@ -27,7 +27,8 @@ const useApi = (endpoint: string) => {
             setError(500)
 
         }).finally(() => {
-          setLoading(false)
+          if(_mounted)          
+            setLoading(false)
       })
     }
 
