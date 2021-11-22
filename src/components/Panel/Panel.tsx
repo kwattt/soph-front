@@ -13,10 +13,10 @@ import Socials from "./Socials"
         stalk ✅
 
       Socials:
-        facebook
+        facebook ✅
         twitch ✅
-        twitter
-        youtube
+        twitter ✅
+        youtube 
 
       Extras:
         autochannel

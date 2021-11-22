@@ -39,7 +39,7 @@ interface Role {
 interface Channel {
   id: string,
   name: string,
-  type: string
+  type: "GUILD_VOICE" | "GUILD_TEXT"
 }
 
 interface Oraculo {
@@ -62,6 +62,18 @@ interface Stalk {
 }
 
 interface Twitch {
+  channel:  string
+  name: string
+  type: number
+}
+
+interface Twitter {
+  channel:  string
+  name: string
+  type: number
+}
+
+interface Facebook {
   channel:  string
   name: string
   type: number

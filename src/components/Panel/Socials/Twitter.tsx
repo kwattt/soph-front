@@ -29,19 +29,19 @@ import { MdDeleteForever } from 'react-icons/md'
 import AddButton from "../Other/AddButton";
 import ChannelSelector from "../Other/ChannelSelector";
 
-interface TwitchID extends Twitch {
+interface TwitterID extends Twitter {
   id: number
 }
 
-const Twitch = () => {
+const Twitter = () => {
   const {guild} = useContext(UserContext)
 
-  const {data, loading, error} = useApi("/socials/twitch")
-  const [newData, setNewData] = useState<Twitch[]>(data)
+  const {data, loading, error} = useApi("/socials/Twitter")
+  const [newData, setNewData] = useState<Twitter[]>(data)
   const [debounceData] = useDebounce(newData, 800)
-  const updateStatus = useUpdateApi("/socials/updateTwitch", debounceData, data)
+  const updateStatus = useUpdateApi("/socials/updateTwitter", debounceData, data)
 
-  const [currentSocial, setCurrentSocial] = useState<TwitchID | undefined>(undefined)
+  const [currentSocial, setCurrentSocial] = useState<TwitterID | undefined>(undefined)
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   useEffect(() => {
@@ -103,11 +103,11 @@ const Twitch = () => {
 
   return <>
     <Box textAlign="center">
-      <Heading>Twitch</Heading>
-      <ToolText tooltip={`${guild.limits.socials} canales.`}>
+      <Heading>Twitter</Heading>
+      <ToolText tooltip={`${guild.limits.socials} usuarios.`}>
         Limites
       </ToolText>
-      <Text>Las opciones te permiten modificar las alertas de canales de Twitch</Text>
+      <Text>Las opciones te permiten modificar las alertas sobre usuarios de Twitter</Text>
     </Box>
     <br/>
 
@@ -143,7 +143,7 @@ const Twitch = () => {
             <ModalHeader>:{currentSocial.name}</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
-              <Heading size="sm" as="h5">Canal</Heading>
+              <Heading size="sm" as="h5">Usuario</Heading>
               <Input size="sm" value={currentSocial.name} onChange={(e) => {onNameChange(e.target.value)}}/>
 
               <Heading size="sm" as="h5" mt="2">Canal de anuncio</Heading>
@@ -183,4 +183,4 @@ const Twitch = () => {
   </>
 }
 
-export default Twitch;
+export default Twitter;

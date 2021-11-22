@@ -7,7 +7,7 @@ import {
 } from "@chakra-ui/react"
 
 const LoadStatus = ({load, error, data} : {load: boolean, error: number | boolean, data: boolean}) => {
-  return <Box>
+  return <Box alignContent="center" textAlign="center">
     {load && <Box>
       <Stack>
         <Skeleton h={6} mx="25%"/>

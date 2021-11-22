@@ -7,16 +7,29 @@ import {
 import {useContext} from "react"
 import { UserContext } from "../../../contexts/userContext"
 
-const ChannelSelector = (props: SelectProps) => {
+interface ChannelSelectorProps extends SelectProps {
+  includeVoice?: boolean
+}
+
+const ChannelSelector = (props: ChannelSelectorProps) => {
   const {guild} = useContext(UserContext)
 
-  return <Box overflowY="auto" maxH="160px" minw="50%">
-    <Select {...props}>
-        {guild.channels.map(role => {
-          return <option key={role.id} value={role.id}>{role.name}</option>
-        })}
-    </Select>
-  </Box>
+  if(props.includeVoice)
+    return <Box overflowY="auto" maxH="160px" minw="50%">
+      <Select {...props}>
+          {guild.channels.map(role => {
+            return <option key={role.id} value={role.id}>{role.name}</option>
+          })}
+      </Select>
+    </Box>
+  else 
+    return <Box overflowY="auto" maxH="160px" minw="50%">
+      <Select {...props}>
+          {guild.channels.filter(channel => {return channel.type === "GUILD_TEXT"}).map(role => {
+            return <option key={role.id} value={role.id}>{role.name}</option>
+          })}
+      </Select>
+    </Box>
 }
 
 
