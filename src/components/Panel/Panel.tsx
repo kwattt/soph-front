@@ -1,5 +1,6 @@
 import Info from "./Info"
 import Messages from "./Messages"
+import Socials from "./Socials"
 
 /*
 
@@ -9,11 +10,11 @@ import Messages from "./Messages"
         oraculo ✅
         reminders ✅
         welcome ✅
-        stalk
+        stalk ✅
 
       Socials:
         facebook
-        twitch
+        twitch ✅
         twitter
         youtube
 
@@ -37,7 +38,7 @@ function Panel({view}: {view: Views}) {
     return <Messages/>
 
   if (view === 'socials')
-    return <>lmao</>
+    return <Socials/>
 
   return <>Uhm, alguien está jugando con las variables 🧁</>
 }

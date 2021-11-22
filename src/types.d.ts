@@ -60,3 +60,9 @@ interface Stalk {
   roles: Array<string>
   messages: Array<string>
 }
+
+interface Twitch {
+  channel:  string
+  name: string
+  type: number
+}

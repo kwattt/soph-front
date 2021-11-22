@@ -5,9 +5,6 @@ import {
   Center,
   IconButton,
   Text,
-  Stack,
-  Checkbox,
-  CheckboxGroup
 } from "@chakra-ui/react"
 import { ToolText, UpdateStatus } from "../Other";
 import useApi, {useUpdateApi} from "./../API"
@@ -89,7 +86,6 @@ const Stalk = () => {
       <Heading textAlign="center" size="md" as="h3">Mensajes</Heading>
       <Box mx="5%" px="5%" maxH="200px" overflowY="auto">
       {newData.messages.map((m, i) => {
-        console.log(m)
         return <Box key={`re+${i}`} mt="2">
         <Flex>
           <ParsedInput 
