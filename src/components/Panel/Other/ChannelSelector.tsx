@@ -9,6 +9,7 @@ import { UserContext } from "../../../contexts/userContext"
 
 interface ChannelSelectorProps extends SelectProps {
   includeVoice?: boolean
+  onlyVoice?: boolean
 }
 
 const ChannelSelector = (props: ChannelSelectorProps) => {
@@ -22,6 +23,16 @@ const ChannelSelector = (props: ChannelSelectorProps) => {
           })}
       </Select>
     </Box>
+  else if (props.onlyVoice){
+    return <Box overflowY="auto" maxH="160px" minw="50%">
+      <Select {...props}>
+          <option value="0">Ninguno</option>
+          {guild.channels.filter(channel => {return channel.type === "GUILD_VOICE"}).map(role => {
+            return <option key={role.id} value={role.id}>{role.name}</option>
+          })}
+      </Select>
+    </Box>
+  }
   else 
     return <Box overflowY="auto" maxH="160px" minw="50%">
       <Select {...props}>

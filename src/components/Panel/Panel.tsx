@@ -20,8 +20,8 @@ import Socials from "./Socials"
         youtube ✅
 
       Extras:
-        autochannel
-        bday
+        autochannel ✅
+        bday ✅
         purge
 
       Niveles:

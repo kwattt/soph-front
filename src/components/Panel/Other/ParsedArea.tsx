@@ -76,12 +76,13 @@ const ParsedArea = (props: ParsedAreaProps) => {
 
   return <Box
     __css={styles}
-    border="solid 1px gray"
+    height="100%"
+    width="100%"
+    overflow="auto"
     onClick={() => {
       setInputState(1)
     }}
     cursor="pointer"
-    whiteSpace="nowrap"
   >
     {newText.map((val, id) => {
       return <Box key={id+"bpi"} display="inline-block">

@@ -91,3 +91,8 @@ interface Birthday {
   bdaymsg: string
   bdayutc: number
 }
+
+interface Autochannel {
+  origenchannel: string
+  targetchannel: string
+}

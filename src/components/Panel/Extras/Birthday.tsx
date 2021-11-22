@@ -19,7 +19,6 @@ import ParsedArea from "../Other/ParsedArea"
 import ChannelSelector from "../Other/ChannelSelector"
 
 const Birthday = () => {
-
   const {data, loading, error} = useApi("/misc/birthday")
   const [newData, setNewData] = useState<Birthday>(data)
   const [debounceData] = useDebounce(newData, 1200)
@@ -48,7 +47,7 @@ const Birthday = () => {
     </Box>
     <br/>
 
-    <Box mx="10%" maxH="230px" overflowY="auto">
+    <Box mx="10%" >
       <Heading textAlign="center" mb="1" size="sm" as="h3">Mensaje</Heading>
       
       <ParsedArea
