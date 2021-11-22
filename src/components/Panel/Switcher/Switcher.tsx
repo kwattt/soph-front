@@ -29,6 +29,7 @@ const Switcher = ({setView, view} : {setView: React.Dispatch<React.SetStateActio
         <SwitchTab view={'info'} title="Servidor"/>
         <SwitchTab view={'messages'} title="Mensajes"/>
         <SwitchTab view={'socials'} title="Sociales"/>
+        <SwitchTab view={'extras'} title="Otros"/>
       </TabList>
     </Tabs>
 

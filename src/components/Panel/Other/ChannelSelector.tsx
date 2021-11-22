@@ -25,6 +25,7 @@ const ChannelSelector = (props: ChannelSelectorProps) => {
   else 
     return <Box overflowY="auto" maxH="160px" minw="50%">
       <Select {...props}>
+          <option value="0">Ninguno</option>
           {guild.channels.filter(channel => {return channel.type === "GUILD_TEXT"}).map(role => {
             return <option key={role.id} value={role.id}>{role.name}</option>
           })}

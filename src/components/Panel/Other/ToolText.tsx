@@ -6,7 +6,7 @@ import { ReactChild, ReactChildren } from "react"
 
 const CustomCard = ({children, tooltip} : {children: ReactChild | ReactChildren, tooltip: string}) => {
   return <Tooltip label={tooltip}>
-    <Tag colorScheme="yellow">{children}</Tag>
+    <Tag mt="1" borderRadius="0" colorScheme="yellow">{children}</Tag>
   </Tooltip> 
 }
 

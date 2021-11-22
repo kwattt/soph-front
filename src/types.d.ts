@@ -78,3 +78,16 @@ interface Facebook {
   name: string
   type: number
 }
+
+interface Youtube {
+  channel:  string
+  name: string
+  type: number
+  real_name: string
+}
+
+interface Birthday {
+  birthday: string
+  bdaymsg: string
+  bdayutc: number
+}

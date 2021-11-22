@@ -9,6 +9,9 @@ const theme = extendTheme({
   components: {
     ParsedInput: {
       ...ctheme.components.Input,
+    },
+    ParsedArea: {
+      ...ctheme.components.Textarea,
     }
   }
 })

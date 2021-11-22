@@ -1,3 +1,4 @@
+import Extras from "./Extras"
 import Info from "./Info"
 import Messages from "./Messages"
 import Socials from "./Socials"
@@ -6,17 +7,17 @@ import Socials from "./Socials"
 
   TODO:
     FUNCS:
-      Messages:
+      Messages: ✅ 
         oraculo ✅
         reminders ✅
         welcome ✅
         stalk ✅
 
-      Socials:
+      Socials: ✅
         facebook ✅
         twitch ✅
         twitter ✅
-        youtube 
+        youtube ✅
 
       Extras:
         autochannel
@@ -28,6 +29,9 @@ import Socials from "./Socials"
         shop
 
       User: 
+
+      Theme: 
+
 */
 
 function Panel({view}: {view: Views}) {
@@ -39,6 +43,9 @@ function Panel({view}: {view: Views}) {
 
   if (view === 'socials')
     return <Socials/>
+
+  if (view === 'extras')
+    return <Extras/>
 
   return <>Uhm, alguien está jugando con las variables 🧁</>
 }
