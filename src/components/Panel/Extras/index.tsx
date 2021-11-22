@@ -1,6 +1,7 @@
 import Section, { SectionC } from "../Section"
 import Autochannel from "./Autochannel"
 import Birthday from "./Birthday"
+import Purge from "./Purge"
 
 const Extras = () => {
   return <Section>
@@ -9,6 +10,9 @@ const Extras = () => {
     </SectionC>
     <SectionC>
       <Autochannel/>
+    </SectionC>
+    <SectionC>
+      <Purge/>
     </SectionC>
   </Section>
 }

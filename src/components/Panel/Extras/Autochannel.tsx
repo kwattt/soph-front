@@ -42,7 +42,6 @@ const Autochannel = () => {
   const [currentSocial, setCurrentSocial] = useState<AutochannelID | undefined>(undefined)
   const { isOpen, onOpen, onClose } = useDisclosure()
 
-
   useEffect(() => {
     let _mounted = true
 
@@ -90,7 +89,6 @@ const Autochannel = () => {
       setCurrentSocial(undefined)
     }
   }
-
 
   const newElement = () => {
     var newArray = [...newData, {origenchannel: "0", targetchannel: ""}]
@@ -146,7 +144,6 @@ const Autochannel = () => {
           <ModalContent>
             <ModalCloseButton />
             <ModalBody>
-              <Heading size="sm" as="h5">Canal</Heading>
 
               <Heading size="sm" as="h5" mt="2">Canal de origen</Heading>
               <ChannelSelector

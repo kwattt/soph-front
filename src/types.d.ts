@@ -96,3 +96,11 @@ interface Autochannel {
   origenchannel: string
   targetchannel: string
 }
+
+
+interface Purge {
+  channel: string
+  hour: number
+  minute: number
+  utc: number
+}

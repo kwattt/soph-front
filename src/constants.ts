@@ -1,1 +1,1 @@
-export const views = ['info', 'messages',  'socials', "extras"] as const
+export const views = ['info', 'messages',  'socials', "extras", "levels"] as const

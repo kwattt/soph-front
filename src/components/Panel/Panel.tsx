@@ -22,7 +22,7 @@ import Socials from "./Socials"
       Extras:
         autochannel ✅
         bday ✅
-        purge
+        purge ✅
 
       Niveles:
         levels
