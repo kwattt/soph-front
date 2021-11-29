@@ -104,3 +104,8 @@ interface Purge {
   minute: number
   utc: number
 }
+
+interface Levels {
+  levels: number
+  channels: string[]
+}

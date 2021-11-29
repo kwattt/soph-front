@@ -1,5 +1,6 @@
 import Extras from "./Extras"
 import Info from "./Info"
+import Levels from "./Levels"
 import Messages from "./Messages"
 import Socials from "./Socials"
 
@@ -25,8 +26,9 @@ import Socials from "./Socials"
         purge ✅
 
       Niveles:
-        levels
+        levels ✅
         shop
+        top 
 
       User: 
 
@@ -46,6 +48,9 @@ function Panel({view}: {view: Views}) {
 
   if (view === 'extras')
     return <Extras/>
+
+  if (view === 'levels')
+    return <Levels/>
 
   return <>Uhm, alguien está jugando con las variables 🧁</>
 }

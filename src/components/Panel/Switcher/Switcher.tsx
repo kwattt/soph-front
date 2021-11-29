@@ -16,7 +16,6 @@ const Switcher = ({setView, view} : {setView: React.Dispatch<React.SetStateActio
   const tabPosition : ResponsiveValue<PositionProps["position"]> | undefined = useBreakpointValue({'base': 'static', 'md': 'fixed'})
 
   return <Box overflowX="auto"> 
-
     <Tabs
       position={tabPosition}
       orientation={tabOrientation}
@@ -30,6 +29,7 @@ const Switcher = ({setView, view} : {setView: React.Dispatch<React.SetStateActio
         <SwitchTab view={'messages'} title="Mensajes"/>
         <SwitchTab view={'socials'} title="Sociales"/>
         <SwitchTab view={'extras'} title="Otros"/>
+        <SwitchTab view={'levels'} title="Niveles"/>
       </TabList>
     </Tabs>
 
