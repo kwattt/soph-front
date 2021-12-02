@@ -109,3 +109,18 @@ interface Levels {
   levels: number
   channels: string[]
 }
+
+interface LevelUser {
+  name: string,
+  points: number,
+  xp: number,
+  level: number
+}
+
+interface Shop {
+  name: string,
+  role: string,
+  channel: string,
+  price: number,
+  type: number
+}

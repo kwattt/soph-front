@@ -15,7 +15,7 @@ import { loadingData, LoadStatus } from "./../Other"
 import { MdDeleteForever } from 'react-icons/md'
 import ParsedInput from "../Other/ParsedInput";
 import AddButton from "../Other/AddButton";
-import RoleSelector from "../Other/RoleSelector";
+import RoleSelector from "../Other/RoleSelectorMultiple";
 
 type StringOrNumber = string | number
 

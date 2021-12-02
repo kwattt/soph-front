@@ -27,12 +27,17 @@ import Socials from "./Socials"
 
       Niveles:
         levels ✅
-        shop
-        top 
+        shop ✅
+        top ✅
 
       User: 
 
       Theme: 
+        * Pending ⚠️
+
+      Footer:
+        Terms & Conditions 
+        Privacy Policy
 
 */
 

@@ -1,25 +1,23 @@
 import {
   Box,
-  Stack,
-  Checkbox,
-  CheckboxGroup,
-  CheckboxGroupProps
+  Select,
+  SelectProps
 } from "@chakra-ui/react"
 
 import {useContext} from "react"
 import { UserContext } from "../../../contexts/userContext"
 
-const RoleSelector = (props: CheckboxGroupProps) => {
+
+const RoleSelector = (props: SelectProps) => {
   const {guild} = useContext(UserContext)
 
   return <Box overflowY="auto" maxH="160px" minw="50%">
-    <CheckboxGroup {...props}>
-      <Stack spacing={1}>
+    <Select {...props}>
+        <option value="0">Ninguno</option>
         {guild.roles.map(role => {
-          return <Checkbox key={role.id} value={role.id}>{role.name}</Checkbox>
+          return <option key={role.id} value={role.id}>{role.name}</option>
         })}
-      </Stack>
-    </CheckboxGroup>
+    </Select>
   </Box>
 }
 
