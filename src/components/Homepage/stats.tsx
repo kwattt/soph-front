@@ -15,9 +15,11 @@ const useStats = () : StatT => {
 
     const fetchStats = async() => {
       await axios.get<StatT>(process.env.REACT_APP_BASE_URL + "/api/extra/stats").then((res) => {
-        setStats(res.data)
+        if(_mounted)
+          setStats(res.data)
       }).catch((err) => {
-        console.log(err)
+        if(_mounted)
+          console.log(err)
       })
       .catch((err) => {
         if(_mounted){

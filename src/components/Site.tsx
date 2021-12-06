@@ -6,6 +6,8 @@ import Nav from './Nav'
 import Homepage from './Homepage';
 import Footer from "./Page/Footer";
 import Panel from "./Panel";
+import Terms from "./Legal/Terms";
+import Privacy from "./Legal/Privacy";
 
 const Site = () => {
   return <>
@@ -21,6 +23,8 @@ const Site = () => {
         <Switch>
           <Route path="/" component={Homepage} exact/>
           <Route path="/panel" component={Panel} exact/>
+          <Route path="/terms" component={Terms}/>
+          <Route path="/privacy" component={Privacy}/>
           <Route path="*" component={c404}/>      
         </Switch>
       </Box>
@@ -30,7 +34,7 @@ const Site = () => {
 }
 
 const c404 = () => {
-  return <>Error</>
+  return <>Página inexistente!</>
 }
 
 

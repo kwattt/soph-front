@@ -20,7 +20,8 @@ import {
   NumberDecrementStepper,
   Select,
   Input,
-  Stack
+  Stack,
+  Kbd
 } from "@chakra-ui/react"
 
 import { useEffect, useState, useContext } from "react"
@@ -125,7 +126,7 @@ const Shop = () => {
         Limites
       </ToolText>
 
-      <Text>Opciones para canjear puntos del servidor.</Text>
+      <Text>Opciones para canjear puntos del servidor. <Kbd>/tienda</Kbd> <Kbd>/comprar</Kbd> </Text>
 
     </Box>
     <br/>
