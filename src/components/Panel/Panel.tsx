@@ -30,14 +30,14 @@ import Socials from "./Socials"
         shop ✅
         top ✅
 
-      User: 
+      User: ✅
 
       Theme: 
         * Pending ⚠️
 
       Footer:
-        Terms & Conditions 
-        Privacy Policy
+        Terms & Conditions ✅
+        Privacy Policy ✅
 
 */
 

@@ -2,7 +2,7 @@ import {
   Box,
   Heading,
   Text,
-
+  Kbd,
   Table,
   Thead,
   Tbody,
@@ -27,7 +27,7 @@ const Top = () => {
   return <>
     <Box textAlign="center">
       <Heading>Top</Heading>
-      <Text>Top de usuarios con mas nivel en el servidor.</Text>
+      <Text>Top de usuarios con mas nivel en el servidor. <Kbd>/top</Kbd></Text>
     </Box>
 
     <Box maxH="250px" my="3" overflowY="auto">

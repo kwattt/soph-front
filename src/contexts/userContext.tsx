@@ -11,9 +11,9 @@ export type UserCType = {
   setCurrent: (current: string) => void,
 }
 
-const defaultContext : UserCType = {
+export const defaultContext : UserCType = {
   logged: false,
-  current: '0',
+  current: '-1',
   user: {
     id: '0',
     username: 'none',

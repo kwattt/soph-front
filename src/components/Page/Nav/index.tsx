@@ -1,4 +1,4 @@
-import logo from './../../static/logof.png'
+import logo from './../../../static/logof.png'
 
 import {
   Box,
@@ -13,12 +13,12 @@ import { useHistory } from "react-router-dom"
 import {MdLogin} from 'react-icons/md'
 import LoggedMenu from './LoggedMenu'
 import { useContext } from 'react';
-import { UserContext } from '../../contexts/userContext';
+import { UserContext } from '../../../contexts/userContext';
 
 const Nav = () => {
   const {logged} = useContext(UserContext)
   const history = useHistory()
-
+ 
   return (
     <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
       <Flex h={16} alignItems='center' justifyContent='space-between'>

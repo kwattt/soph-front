@@ -2,7 +2,7 @@ import { BrowserRouter, Switch, Route} from "react-router-dom";
 
 import {Box} from '@chakra-ui/react'
 
-import Nav from './Nav'
+import Nav from './Page/Nav'
 import Homepage from './Homepage';
 import Footer from "./Page/Footer";
 import Panel from "./Panel";

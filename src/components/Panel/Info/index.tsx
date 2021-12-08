@@ -9,12 +9,19 @@ import {
 } from "@chakra-ui/react"
 
 import { UserContext } from "../../../contexts/userContext"
-import { useContext } from "react"
+import { useContext, useEffect } from "react"
 
 import { BsPersonLinesFill, BsFillChatFill, BsFillPencilFill } from "react-icons/bs"
+import { useHistory } from "react-router-dom"
 
 const Info = () => {
-  const { guild } = useContext(UserContext)
+  const { guild, current } = useContext(UserContext)
+  const history = useHistory()
+
+  useEffect(() => {
+    if(current === '-1')
+      history.push('/')
+  }, [current, history])
 
   return  <Box>
     <Center>

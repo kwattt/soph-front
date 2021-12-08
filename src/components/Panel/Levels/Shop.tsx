@@ -6,6 +6,7 @@ import {
   Button,
   useDisclosure,
   Modal,
+  ModalHeader,
   ModalOverlay,
   ModalContent,
   ModalFooter,
@@ -105,12 +106,12 @@ const Shop = () => {
   }
 
   const onModalClose = () => {
-    if(currentSocial!==undefined){
+    if(currentSocial !== undefined){
       var newvals = [...newData]  
       const {name, role, channel, price, type } = currentSocial
       newvals[currentSocial.id] = {name, role, channel, price, type}
       setNewData(newvals)
-      setCurrentSocial(undefined)
+      setCurrentSocial(undefined)  
     }
   }
 
@@ -160,6 +161,10 @@ const Shop = () => {
           <ModalOverlay />
           <ModalContent>
             <ModalCloseButton />
+
+            <ModalHeader>
+              {currentSocial.name ? currentSocial.name : "Nuevo item"}
+            </ModalHeader>
             <ModalBody>
 
               <Heading size="sm" as="h5" mt="2">Nombre</Heading>
