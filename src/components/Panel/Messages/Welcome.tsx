@@ -15,12 +15,18 @@ import { loadingData, LoadStatus } from "./../Other"
 import { MdDeleteForever } from 'react-icons/md'
 import ParsedInput from "../Other/ParsedInput";
 import AddButton from "../Other/AddButton";
+import ChannelSelector from "../Other/ChannelSelector";
+
+interface WelcomeContent {
+  channel: string,
+  content: WMessage[]
+}
 
 const Welcome = () => {
   const {guild} = useContext(UserContext)
 
   const {data, loading, error} = useApi("/messages/welcome")
-  const [newData, setNewData] = useState<WMessage[]>(data)
+  const [newData, setNewData] = useState<WelcomeContent>(data)
   const [debounceData] = useDebounce(newData, 1200)
   const updateStatus = useUpdateApi("/messages/updateWelcome", debounceData, data)
 
@@ -42,20 +48,24 @@ const Welcome = () => {
 
 
   const handleChangeText = (e: any, id: number) => {
-    var newstate = [...newData]
+    var newstate = [...newData.content]
     newstate[id].msg = e.target.value
-    setNewData(newstate)
+    setNewData(oldData => ({channel: oldData.channel, content: newstate}))
   }
 
   const deleteElement = (id:number) => {
-    var newArray = [...newData]
+    var newArray = [...newData.content]
     newArray.splice(id, 1)
-    setNewData(newArray)
+    setNewData(oldData => ({channel: oldData.channel, content: newArray}))
   }
 
   const newElement = (type: number) => {
-    var newArray = [...newData, {type: type, msg: "Nuevo"}]
-    setNewData(newArray)
+    var newArray = [...newData.content, {type: type, msg: "Nuevo"}]
+    setNewData(oldData => ({channel: oldData.channel, content: newArray}))
+  }
+
+  const onChannelChange = (channel: string) => {
+    setNewData(oldData => ({channel: channel, content: oldData.content}))
   }
 
   return <>
@@ -69,9 +79,23 @@ const Welcome = () => {
     <br/>
 
     <Box>
+
+      <Box>
+      <Heading textAlign="center" size="md" as="h3">Canal</Heading>
+        <Box mx="5%" px="5%" maxH="200px" overflowY="auto">
+    
+        <ChannelSelector
+            onChange={(e) => {onChannelChange(e.target.value)}}
+            value={newData.channel}
+            size="sm"
+        />
+
+        </Box>
+      </Box>
+
       <Heading textAlign="center" size="md" as="h3">Entrada</Heading>
       <Box mx="5%" px="5%" maxH="200px" overflowY="auto">
-      {newData.map((m, i) => {
+      {newData.content.map((m, i) => {
 
         if(m.type === 1)
           return ""
@@ -101,7 +125,7 @@ const Welcome = () => {
       <Center>
         <AddButton
           onClick={()=>{newElement(0)}}
-          currentl={newData.length}
+          currentl={newData.content.length}
           limit={guild.limits.welcome}
         />
       </Center>
@@ -110,7 +134,7 @@ const Welcome = () => {
     <Box>
       <Heading textAlign="center" size="md" as="h3">Salida</Heading>
       <Box mx="5%" px="5%" maxH="200px" overflowY="auto">
-      {newData.map((m, i) => {
+      {newData.content.map((m, i) => {
 
         if(m.type === 0)
           return ""
@@ -140,7 +164,7 @@ const Welcome = () => {
       <Center>
         <AddButton
           onClick={()=>{newElement(1)}}
-          currentl={newData.length}
+          currentl={newData.content.length}
           limit={guild.limits.welcome}
         />
       </Center>
