@@ -1,5 +1,5 @@
 import Section, { SectionC } from "../Section"
-import Facebook from "./Facebook"
+//import Facebook from "./Facebook"
 import Twitch from "./Twitch"
 import Twitter from "./Twitter"
 import YoutubeC from "./Youtube"
@@ -13,12 +13,18 @@ const Socials = () => {
       <Twitter/>
     </SectionC>
     <SectionC>
-      <Facebook/>
+      <YoutubeC/>
     </SectionC>
     <SectionC>
-      <YoutubeC/>
     </SectionC>
   </Section>
 }
+
+/*
+    <SectionC>
+      <Facebook/>
+    </SectionC> /
+
+*/
 
 export default Socials
