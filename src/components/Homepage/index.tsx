@@ -33,6 +33,9 @@ const Homepage = () => {
     <Center mt="3">
       <Button
         borderRadius="3"
+        onClick={() => {
+          window.open("https://discord.com/oauth2/authorize?&client_id=657839781509857302&scope=bot%20applications.commands&permissions=8");
+        }}
       >
         Invitar 💌
       </Button>
